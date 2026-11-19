@@ -36,8 +36,12 @@ public:
         return buf[index];
     }
 
-    // TODO Step 2: void fill(int val) - set every element to val
-
+    void fill(int val) {
+        for (int i = 0; i < len; i++) {
+            buf[i] = val;
+        }
+    }
+ 
 private:
     int len;
     int* buf;
