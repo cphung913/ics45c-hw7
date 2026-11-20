@@ -86,3 +86,15 @@ TEST(IntArrayTests, MoveConstructor) {
     EXPECT_EQ(b[2], 5);
     EXPECT_EQ(a.length(), 0);
 }
+
+TEST(IntArrayTests, Swap) {
+    Array a{3};
+    a.fill(1);
+    Array b{1};
+    b.fill(9);
+    swap(a, b);
+    EXPECT_EQ(a.length(), 1);
+    EXPECT_EQ(a[0], 9);
+    EXPECT_EQ(b.length(), 3);
+    EXPECT_EQ(b[2], 1);
+}
