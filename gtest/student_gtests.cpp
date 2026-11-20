@@ -10,6 +10,8 @@
 
 #include <gtest/gtest.h>
 
+#include <string>
+
 #include "int_array.hpp"
 
 TEST(IntArrayTests, DefaultArrayIsEmpty) {
@@ -22,4 +24,19 @@ TEST(IntArrayTests, SizedArrayReportsItsLength) {
     EXPECT_EQ(a.length(), 5);
 }
 
-// ADD YOUR TESTS HERE:
+TEST(IntArrayTests, Subscript) {
+    Array a{3};
+    a[0] = 1;
+    a[2] = 3;
+    EXPECT_EQ(a[0], 1);
+    EXPECT_EQ(a[2], 3);
+    EXPECT_THROW(a[3], std::string);
+
+    std::string message;
+    try {
+        a[-1];
+    } catch (const std::string& e) {
+        message = e;
+    }
+    EXPECT_EQ(message, "Exception operator[](-1) Out Of Range");
+}
