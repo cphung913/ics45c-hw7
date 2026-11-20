@@ -11,7 +11,9 @@
 #include <gtest/gtest.h>
 
 #include <string>
+#include <utility>
 
+#include "alloc.hpp"
 #include "int_array.hpp"
 
 TEST(IntArrayTests, DefaultArrayIsEmpty) {
@@ -70,4 +72,17 @@ TEST(IntArrayTests, CopyConstructor) {
 
     b[0] = 9;
     EXPECT_EQ(a[0], 1);
+}
+
+TEST(IntArrayTests, MoveConstructor) {
+    AllocationTracker tracker;
+    Array a{3};
+    a.fill(5);
+    std::size_t allocs_before = tracker.get_num_allocations();
+    Array b{std::move(a)};
+    std::size_t allocs_after = tracker.get_num_allocations();
+    EXPECT_EQ(allocs_before, allocs_after);
+    EXPECT_EQ(b.length(), 3);
+    EXPECT_EQ(b[2], 5);
+    EXPECT_EQ(a.length(), 0);
 }
