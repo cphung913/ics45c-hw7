@@ -40,3 +40,14 @@ TEST(IntArrayTests, Subscript) {
     }
     EXPECT_EQ(message, "Exception operator[](-1) Out Of Range");
 }
+
+TEST(IntArrayTests, ConstSubscript) {
+    Array a{3};
+    a[0] = 1;
+    a[2] = 3;
+    const Array& c = a;
+    EXPECT_EQ(c[0], 1);
+    EXPECT_EQ(c[2], 3);
+    EXPECT_THROW(c[3], std::string);
+    EXPECT_THROW(c[-1], std::string);
+}
