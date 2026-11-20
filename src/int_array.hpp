@@ -16,6 +16,11 @@ public:
     }
 
     // TODO Step 4: copy constructor
+    Array(const Array &a) : len{a.length()}, buf{new int[len]} {
+        for (int i = 0; i < len; i++) {
+            buf[i] = a[i];
+        }
+    }
     // TODO Step 4: move constructor
     // TODO Step 5: friend void swap(Array& lhs, Array& rhs) noexcept
     // TODO Step 5: copy assignment
