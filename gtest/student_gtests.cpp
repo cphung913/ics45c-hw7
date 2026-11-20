@@ -98,3 +98,20 @@ TEST(IntArrayTests, Swap) {
     EXPECT_EQ(b.length(), 3);
     EXPECT_EQ(b[2], 1);
 }
+
+TEST(IntArrayTests, CopyAssignment) {
+    Array a{2};
+    a.fill(5);
+    Array b{4};
+    b = a;
+    EXPECT_EQ(b.length(), 2);
+    EXPECT_EQ(b[1], 5);
+
+    b[0] = 0;
+    EXPECT_EQ(a[0], 5);
+
+    Array& same = b;
+    b = same;
+    EXPECT_EQ(b[0], 0);
+    EXPECT_EQ(b[1], 5);
+}
