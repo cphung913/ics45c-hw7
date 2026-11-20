@@ -51,3 +51,10 @@ TEST(IntArrayTests, ConstSubscript) {
     EXPECT_THROW(c[3], std::string);
     EXPECT_THROW(c[-1], std::string);
 }
+
+TEST(IntArrayTests, Fill) {
+    Array a{4};
+    a.fill(7);
+    EXPECT_EQ(a[0], 7);
+    EXPECT_EQ(a[3], 7);
+}
