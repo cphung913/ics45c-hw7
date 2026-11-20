@@ -58,3 +58,16 @@ TEST(IntArrayTests, Fill) {
     EXPECT_EQ(a[0], 7);
     EXPECT_EQ(a[3], 7);
 }
+
+TEST(IntArrayTests, CopyConstructor) {
+    Array a{3};
+    a.fill(1);
+    a[2] = 3;
+    Array b{a};
+    EXPECT_EQ(b.length(), 3);
+    EXPECT_EQ(b[0], 1);
+    EXPECT_EQ(b[2], 3);
+
+    b[0] = 9;
+    EXPECT_EQ(a[0], 1);
+}
