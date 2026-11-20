@@ -29,13 +29,18 @@ public:
         std::swap(lhs.len, rhs.len);
         std::swap(rhs.buf, lhs.buf);
     }
-    // TODO Step 5: copy assignment
+
     Array &operator=(const Array &a) {
         Array cpy(a);
         swap(cpy, *this);
         return *this;
     }
-    // TODO Step 5: move assignment
+
+    Array &operator=(Array &&a) noexcept {
+        swap(a, *this);
+        return *this;
+    }
+    
     ~Array() {
         delete[] buf;
     }
