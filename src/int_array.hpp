@@ -22,10 +22,13 @@ public:
     }
 
     Array(Array &&a) noexcept : len{0}, buf{nullptr} {
-        std::swap(buf, a.buf);
-        std::swap(len, a.len);
+        swap(*this, a);
     }
-    // TODO Step 5: friend void swap(Array& lhs, Array& rhs) noexcept
+
+    friend void swap(Array& lhs, Array& rhs) noexcept {
+        std::swap(lhs.len, rhs.len);
+        std::swap(rhs.buf, lhs.buf);
+    }
     // TODO Step 5: copy assignment
     // TODO Step 5: move assignment
     ~Array() {
