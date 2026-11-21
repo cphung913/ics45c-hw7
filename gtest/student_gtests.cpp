@@ -139,3 +139,14 @@ TEST(IntArrayTests, MoveAssignment) {
     EXPECT_EQ(allocs_before, allocs_after);
     EXPECT_EQ(still_allocated, 0u);
 }
+
+TEST(IntArrayTests, Destructor) {
+    AllocationTracker tracker;
+    {
+        Array a{3};
+    }
+    std::size_t still_allocated = tracker.get_allocations().size();
+    std::size_t mismatched = tracker.get_mismatching_deletes();
+    EXPECT_EQ(still_allocated, 0u);
+    EXPECT_EQ(mismatched, 0u);
+}
