@@ -115,3 +115,27 @@ TEST(IntArrayTests, CopyAssignment) {
     EXPECT_EQ(b[0], 0);
     EXPECT_EQ(b[1], 5);
 }
+
+TEST(IntArrayTests, MoveAssignment) {
+    AllocationTracker tracker;
+    std::size_t allocs_before = 0;
+    std::size_t allocs_after = 0;
+    {
+        Array a{2};
+        a.fill(6);
+        Array b{5};
+        allocs_before = tracker.get_num_allocations();
+        b = std::move(a);
+        allocs_after = tracker.get_num_allocations();
+        EXPECT_EQ(b.length(), 2);
+        EXPECT_EQ(b[1], 6);
+
+        Array& same = b;
+        b = std::move(same);
+        EXPECT_EQ(b.length(), 2);
+        EXPECT_EQ(b[0], 6);
+    }
+    std::size_t still_allocated = tracker.get_allocations().size();
+    EXPECT_EQ(allocs_before, allocs_after);
+    EXPECT_EQ(still_allocated, 0u);
+}
