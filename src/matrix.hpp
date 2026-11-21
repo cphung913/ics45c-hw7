@@ -2,6 +2,7 @@
 #define MATRIX_HPP
 
 #include <iostream>
+#include <sstream>
 
 #include "array.hpp"
 
@@ -18,11 +19,11 @@ public:
     }
 
     Array<T>& operator[](int row) {
-
+        return data[row];
     }
 
     const Array<T>& operator[](int row) const {
-
+        return data[row];
     }
 
     int num_rows() const {
