@@ -2,7 +2,6 @@
 #define MATRIX_HPP
 
 #include <iostream>
-#include <sstream>
 
 #include "array.hpp"
 
@@ -27,11 +26,11 @@ public:
     }
 
     int num_rows() const {
-
+        return rows;
     }
 
     int num_cols() const {
-
+        return cols
     }
 
     void fill(const T& val) {
