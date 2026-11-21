@@ -8,12 +8,13 @@
 template <typename T>
 class Matrix {
 public:
-    Matrix() {
-
+    Matrix() : rows{0}, cols{0}, data{Array<Array<T>>()} {
     }
 
-    Matrix(int rows, int cols) {
-
+    Matrix(int rows, int cols): rows{rows}, cols{cols}, data{Array<Array<T>>(rows)} {
+        for (int i = 0; i < rows; i++) {
+            data[i] = Array<T>(cols);
+        }
     }
 
     Array<T>& operator[](int row) {
@@ -48,7 +49,7 @@ private:
 
 template <typename T>
 std::ostream& operator<<(std::ostream& out, const Matrix<T>& matrix) {
-    // TODO: print each row on its own line
+
 }
 
 template <typename T>
